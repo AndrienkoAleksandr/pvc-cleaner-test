@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: task-pv-pod
+spec:
+  activeDeadlineSeconds: 10
+  restartPolicy: "Never"
+  volumes:
+    - name: task-pv-storage
+      persistentVolumeClaim:
+        claimName: app-studio-default-workspace
+  containers:
+    - name: task-pv-container
+      image: fedora:36
+      ports:
+        - containerPort: 80
+          name: "http-server"
+      command: ["/bin/sh"]
+      args: ["-c", "cd /workspace; du -h --max-depth=2;"]
+      volumeMounts:
+        - mountPath: "/workspace"
+          name: task-pv-storage
