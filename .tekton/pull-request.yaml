@@ -46,7 +46,7 @@ spec:
             - name: workspace
           steps:
             - name: noop-task
-              image: registry.access.redhat.com/ubi8/ubi-micro:8.5
+              image: registry.access.redhat.com/ubi8/ubi-micro:8.7
               workingDir: $(workspaces.workspace.path)
               script: |
                 exit 0
